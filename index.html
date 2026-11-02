@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMKERS | Event Feedback</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green: #a3ff12;
+  --bg: #080a08;
+  --card: #111511;
+  --border: #293329;
+  --muted: #929b91;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 35px 16px;
+}
+
+.container {
+  max-width: 680px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 35px;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.brand span {
+  color: var(--green);
+}
+
+.tagline {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.hero {
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, #151d12, #0c100c);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+h1 span {
+  color: var(--green);
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 28px;
+}
+
+.section-title {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 23px;
+}
+
+.field {
+  margin-bottom: 23px;
+}
+
+label, .question {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+input, select, textarea {
+  width: 100%;
+  background: #090d09;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  transition: .2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px #a3ff121c;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+select option {
+  background: #111511;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 30px;
+  color: #454d43;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+  color: var(--green);
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.radio-group label {
+  border: 1px solid var(--border);
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 0;
+}
+
+.radio-group input {
+  width: auto;
+  accent-color: var(--green);
+  margin-right: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--green);
+  color: #080a08;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: #c0ff69;
+  box-shadow: 0 0 22px #a3ff1233;
+  transform: translateY(-2px);
+}
+
+.note {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  margin-top: 17px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  color: #667064;
+  font-size: 11px;
+  margin-top: 30px;
+}
+
+footer span {
+  color: var(--green);
+}
+
+#success {
+  display: none;
+  text-align: center;
+  padding: 55px 20px;
+}
+
+#success h2 {
+  color: var(--green);
+  margin: 15px 0;
+}
+
+@media(max-width: 500px) {
+  body { padding: 22px 12px; }
+  .hero, .form-card { padding: 22px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <img
+    src="gamkers-logo.png"
+    alt="GAMKERS official logo"
+    class="logo"
+    onerror="this.style.display='none'"
+  >
+  <div>
+    <div class="brand">GAM<span>KERS</span></div>
+    <div class="tagline">LEARN. HUNT. DOMINATE.</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">EVENT FEEDBACK 2026</div>
+  <h1>Your experience.<br><span>Your feedback.</span></h1>
+  <p>
+    Thank you for being part of GAMKERS.
+    Share your experience and help us make
+    our upcoming events even better.
+  </p>
+</section>
+
+<div class="form-card" id="formCard">
+
+  <div class="section-title">PARTICIPANT DETAILS</div>
+
+  <form id="feedbackForm">
+
+    <div class="field">
+      <label for="session">Event session *</label>
+      <select id="session" name="session" required>
+        <option value="">Select your session</option>
+        <option value="2026-11-14">November 14 — Online</option>
+        <option value="2026-11-21">November 21 — Online</option>
+        <option value="2026-11-28">November 28 — Online</option>
+        <option value="2026-12-05">December 5 — Offline</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="name">Full name *</label>
+      <input id="name" name="name"
+        placeholder="Enter your registered name" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Registered email address *</label>
+      <input id="email" name="email" type="email"
+        placeholder="Enter your registration email" required>
+    </div>
+
+    <div class="section-title">YOUR EXPERIENCE</div>
+
+    <div class="field">
+      <label>1. How would you rate the overall event? *</label>
+      <div class="rating">
+        <input type="radio" id="s5" name="overall" value="5" required>
+        <label for="s5">★</label>
+        <input type="radio" id="s4" name="overall" value="4">
+        <label for="s4">★</label>
+        <input type="radio" id="s3" name="overall" value="3">
+        <label for="s3">★</label>
+        <input type="radio" id="s2" name="overall" value="2">
+        <label for="s2">★</label>
+        <input type="radio" id="s1" name="overall" value="1">
+        <label for="s1">★</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>2. How was the event content? *</label>
+      <div class="radio-group">
+        <label><input type="radio" name="content" value="Excellent" required> Excellent</label>
+        <label><input type="radio" name="content" value="Good"> Good</label>
+        <label><input type="radio" name="content" value="Average"> Average</label>
+        <label><input type="radio" name="content" value="Poor"> Poor</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>3. Was the event well organised? *</label>
+      <div class="radio-group">
+        <label><input type="radio" name="organisation" value="Yes" required> Yes</label>
+        <label><input type="radio" name="organisation" value="Partially"> Partially</label>
+        <label><input type="radio" name="organisation" value="No"> No</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="best">4. What did you like most about the event?</label>
+      <textarea id="best" name="best"
+        placeholder="Share your favourite moments..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="improve">5. What could we improve?</label>
+      <textarea id="improve" name="improve"
+        placeholder="Your suggestions are valuable..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="additional">6. Any additional comments?</label>
+      <textarea id="additional" name="additional"
+        placeholder="Anything else you would like to share..."></textarea>
+    </div>
+
+    <button type="submit">SUBMIT FEEDBACK →</button>
+
+    <p class="note">
+      Your feedback helps us improve future GAMKERS events.
+      Only registered participants are eligible to submit.
+    </p>
+
+  </form>
+</div>
+
+<div id="success">
+  <div style="font-size:48px;color:#a3ff12">✓</div>
+  <h2>Feedback received!</h2>
+  <p style="color:#929b91">
+    Thank you for sharing your experience with GAMKERS.
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 <span>GAMKERS</span> · Learn. Hunt. Dominate.</p>
+</footer>
+
+</div>
+
+<script>
+const form = document.getElementById("feedbackForm");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const response = await fetch("/api/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.message || "Unable to submit feedback.");
+      return;
+    }
+
+    document.getElementById("formCard").style.display = "none";
+    document.getElementById("success").style.display = "block";
+
+  } catch (error) {
+    alert("Could not connect to the server. Please try again.");
+  }
+});
+</script>
+
+</body>
+</html>
